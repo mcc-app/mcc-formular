@@ -1,0 +1,400 @@
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide { 
+    display: none !important; 
+}
+
+
+.testimg {
+    width: 700px
+}
+
+.col-15 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 15%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 15%;
+  -ms-flex: 0 0 15%;
+  flex: 0 0 15%;
+  max-width: 15%; 
+}
+
+.col-30 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 30%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 30%;
+  -ms-flex: 0 0 30%;
+  flex: 0 0 30%;
+  max-width: 30%; 
+}
+
+.col-35 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 35%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 35%;
+  -ms-flex: 0 0 35%;
+  flex: 0 0 35%;
+  max-width: 35%; 
+}
+
+.col-40 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 40%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 40%;
+  -ms-flex: 0 0 40%;
+  flex: 0 0 40%;
+  max-width: 40%; 
+}
+
+.bar.bar-mcc {
+    background-color: #FF9500;
+    border-color: #FF9500;
+    background-image: linear-gradient(0deg, #FF9500, #FF9500 50%, transparent 50%);
+    color: white;
+}
+
+ .bar.bar-mcc .title {
+       color: white;
+ }
+
+ .bar.bar-mcc img {
+       z-index: 10000 !important
+ }
+
+.bar.bar-header {
+    height: 40px;
+}
+
+.bar-mcc .button {
+    color: white;
+}
+
+.bar-mcc .button .icon {
+    font-size: 32px;
+}
+
+.list {
+    margin-bottom: 5px;
+}
+
+.list .item {
+    padding: 8px;
+    margin-right: 10px;
+   
+}
+
+.item .badge {
+    top: 7px;
+    right: 12px;
+    padding-top:4px;
+}
+
+a.item.active, 
+.item.active.item-stable {
+    background-color: #F5F5F5;
+    border-color: #cccccc;
+    color: black;
+}
+
+.icon.formular {
+     margin-left: 0px;
+     margin-top: 0px;
+     padding-left: 15px;
+     padding-top:0px;
+     top: -4px;
+     left: 5px;
+     color: #FF9500;
+}
+
+.item.item-stable {
+    border-color: #b2b2b2;
+    background-color: #FFFFFF;
+    color: #444;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 10px 10px 10px 10px;
+    font-size: 16px;
+    
+}
+
+.list .item.mcc-list {
+    line-height: 38px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    margin: 5px 10px 5px 10px;
+}
+
+.list .item.item-accordion {
+  line-height: 38px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  transition: 0.11s all linear;
+  margin: 10px 10px 10px 10px;
+}
+
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+a.item.active2 {
+    background-color: #B4113E;
+    border-color: #cccccc;
+    color: white;
+}
+
+img.footerlogo {
+    width: 160px;
+    height: 35px;
+    right: 15px;
+    position:absolute;
+}
+
+img.headerlogo {
+    width: 140px;
+    height: 40px;
+    right: 14px;
+    top: 0px;
+    position:absolute;
+}
+
+.button-icon.buttonlogo {
+    top: -7px;
+}
+
+.button-icon.buttonlogo img {
+    width: 140px;
+    height: 40px;
+}
+
+.button.action2 {
+     width: 180px;
+     color: #FF9500;
+     margin-left:0px;
+}
+
+.button.action {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 18px;
+    margin-left: 0px;
+    text-indent: 10px;
+    letter-spacing: 1px;
+}
+
+.button.actionX {
+    top: -7px;
+    color: black;
+}
+
+.button.btnmodal {
+     background-color: #FF9500;
+     color: white;
+}
+
+.button-icon.button1:active, .button-clear1:active {
+     opacity: 1.0; 
+}
+
+.item-radio .radio-icon {
+    padding-top: 5px;
+}
+
+.card {
+    box-shadow: 0px 0px 0px;
+}
+
+canvas {
+  border-bottom: 1px solid rgba(0,0,0,0.3); 
+  background-color: #FFF;
+  box-shadow: 0 9px 20px -5px rgba(0,0,0,0.8);
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+}
+
+sign canvas {
+    position: relative;
+    margin-top:15px;
+    margin-bottom:25px;
+    display:block;
+}
+
+.searchfield {
+  right: 20px;
+  left: 20px;
+  position: absolute;
+}
+
+span.input-label  {
+    max-width: 300px;
+}
+
+.item-stacked-label {
+    margin:0px;
+}
+
+.mcc.card {
+    margin-top: 2px;
+    margin-bottom: 0px;
+}
+
+.mcc.row {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.modal.fullsize {
+    top: 0px;
+    left: 0px;
+    right:0px;
+    bottom:0px;
+    height: 100%;
+    width: 100%;
+}
+
+input {
+    border: 2px !important;
+    height: 20px !important;
+}
+
+input[readonly] {
+    width: 95%;
+    text-align:left;
+}
+
+input[type="checkbox"] {
+    height: 30px !important;
+}
+
+input[type="date"] {
+    height: 20px !important;
+    padding-top:0px !important;
+}
+
+.item-stacked-label1 .input-label {
+    display: block;
+}
+
+input[type="text"] .item-stacked-label .input-label {
+    display: block;
+}
+
+
+select  {
+    min-width: 100px;
+}
+
+.item-select select
+ {
+    display:block;
+    direction: ltr;
+    position: relative;
+    left:0px;
+    right:0px;
+    height: 20px !important;
+    top: 0px;
+    margin: 0px;
+    padding:0px !important;
+    max-width: 90%!important;
+}
+
+.item-select:after {
+    right:10px;
+    top:35%;
+}
+
+.item.menu-group {
+    margin-top: 12px;
+    border: none;
+}
+
+.item.menu-group h2 {
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+.icon.menu-group-icon {
+    font-size: 26px;
+    color: #FF9500;
+}
+
+.icon.menu-item-icon {
+    font-size: 20px;
+    color: #FF9500;
+}
+
+.spacing-text {
+    line-height: 20px;
+}
+
+.row-space {
+    padding-top: 1px;
+}
+
+.slider-pager .slider-pager-page.active {
+    color: #FF9500;
+}
+
+.slider {
+  height: 100%;
+}
+
+.help-slide {
+     height: 100%;
+}
+
+.help-item {
+    margin-left:0px;
+    margin-right:0px;
+    height: 90%;
+}
+
+.help-scroll {
+    width:100%
+}
+
+.o-left-padding {
+     padding-left:0px;
+}
+
+
+form i.icon.error {
+  color: #ef4e3a; 
+}
+
+form input + i.icon.error {
+  display: none;
+  margin-left: 8px; 
+}
+
+form.ng-submitted input.ng-invalid + i.icon.error {
+  display: block; 
+}
+
+form.ng-submitted input.ng-valid + i.icon.error {
+  display: none; 
+}
+
+form .has-error {
+  border: 1px solid #cc2511; 
+}
+
+form .has-success1 {
+  border: 1px solid #3d8b3d; 
+}
+
+.item-stacked-label i.icon.error {
+  position: absolute;
+  top:0px;
+  right: 10px;
+}
+
