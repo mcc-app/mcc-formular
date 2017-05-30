@@ -1,5 +1,4 @@
-/*! services : mccClient - 1.0.0 (02.03.2015 11:03) */
-var app;
+var app;
 (function (app) {
     (function (service) {
         'use strict';
@@ -246,9 +245,10 @@ var app;
         
 
         var Data = (function () {
-            function Data(api, socket) {
+            function Data(api, socket, ionicHistory) {
                 this.api = api;
                 this.socket = socket;
+                this.ionicHistory = ionicHistory;
                 this.groups = {};
                 this.standards = [];
                 this.api.serverIP = 'https://app.carecapital-online.de:443';
@@ -281,9 +281,12 @@ var app;
             }
             Data.prototype.apiSilentLogin = function (cb) {
                 var _this = this;
-                if (this.user.isLogin || (this.user.name && this.user.pw)) {
-                    Data.mySocket.removeListener('refreshList', null);
-                    Data.mySocket.removeListener('connect', null);
+                if (this.user.isLogin) {
+                    try  {
+                        Data.mySocket.removeListener('refreshList', null);
+                        Data.mySocket.removeListener('connect', null);
+                    } catch (error) {
+                    }
 
                     Data.mySocket.disconnect();
 
@@ -292,12 +295,12 @@ var app;
                             if (!err) {
                                 Data.mySocket.connect(_this.api.serverIP);
 
-                                Data.mySocket.addListener('connect', function (e, d) {
+                                Data.mySocket.on('connect', function () {
                                     _this.apiFormularList(function (err) {
                                     });
                                 });
 
-                                Data.mySocket.addListener('refreshList', function (e, d) {
+                                Data.mySocket.on('refreshList', function () {
                                     _this.apiFormularList(function (err) {
                                     });
                                 });
@@ -321,6 +324,9 @@ var app;
 
             Data.prototype.apiLogin = function (username, password, cb) {
                 var _this = this;
+                this.ionicHistory.clearCache();
+                this.ionicHistory.clearHistory();
+
                 this.api.login(username, password, function (err, data) {
                     if (!err) {
                         _this.user.name = parseInt(username);
@@ -334,12 +340,12 @@ var app;
 
                         Data.mySocket.connect(_this.api.serverIP);
 
-                        Data.mySocket.addListener('refreshList', function (e, d) {
+                        Data.mySocket.on('connect', function () {
                             _this.apiFormularList(function (err) {
                             });
                         });
 
-                        Data.mySocket.addListener('connect', function (e, d) {
+                        Data.mySocket.on('refreshList', function () {
                             _this.apiFormularList(function (err) {
                             });
                         });
@@ -563,7 +569,7 @@ var app;
                     }
                 });
             };
-            Data.$inject = ['apiService', 'socket'];
+            Data.$inject = ['apiService', 'socket', '$ionicHistory'];
             return Data;
         })();
         service.Data = Data;
@@ -840,6 +846,80 @@ var app;
 
         
 
+        var IonicPopover = (function () {
+            function IonicPopover(popover) {
+                this.popover = popover;
+            }
+            IonicPopover.prototype.create = function (name, options) {
+                if (IonicPopover.handle[name]) {
+                    this.destroy(name);
+                }
+
+                this.popover.fromTemplateUrl(name + '.html', {
+                    scope: options && options.scope,
+                    focusFirstInput: (options && typeof options.focusFirstInput !== "undefined") ? options.focusFirstInput : false,
+                    backdropClickToClose: (options && typeof options.backdropClickToClose !== "undefined") ? options.backdropClickToClose : true,
+                    hardwareBackButtonClose: (options && typeof options.hardwareBackButtonClose !== "undefined") ? options.hardwareBackButtonClose : true
+                }).then(function (pop) {
+                    IonicPopover.handle.push(name);
+                    IonicPopover.handle[name] = pop;
+                });
+            };
+
+            IonicPopover.prototype.show = function (name, event_OR_element) {
+                var elem = angular.element(event_OR_element.srcElement);
+
+                if (IonicPopover.handle[name]) {
+                    IonicPopover.handle[name].show(event_OR_element);
+                }
+            };
+
+            IonicPopover.prototype.isShown = function (name) {
+                var result = false;
+
+                if (IonicPopover.handle[name]) {
+                    result = IonicPopover.handle[name].isShown();
+                }
+
+                return result;
+            };
+
+            IonicPopover.prototype.hide = function (name) {
+                if (IonicPopover.handle[name]) {
+                    IonicPopover.handle[name].hide();
+                }
+            };
+
+            IonicPopover.prototype.destroy = function (name) {
+                if (IonicPopover.handle[name]) {
+                    IonicPopover.handle[name].hide();
+
+                    IonicPopover.handle[name].remove();
+
+                    delete IonicPopover.handle[name];
+
+                    IonicPopover.handle.splice(IonicPopover.handle.indexOf(name), 1);
+                }
+            };
+            IonicPopover.handle = [];
+
+            IonicPopover.$inject = ['$ionicPopover'];
+            return IonicPopover;
+        })();
+        service.IonicPopover = IonicPopover;
+
+        app.registerService('serviceIonicPopover', IonicPopover);
+    })(app.service || (app.service = {}));
+    var service = app.service;
+})(app || (app = {}));
+
+var app;
+(function (app) {
+    (function (service) {
+        'use strict';
+
+        
+
         var ModalForgetPW = (function () {
             function ModalForgetPW(modal) {
                 this.modal = modal;
@@ -902,7 +982,7 @@ var app;
                 if (!this.dialogModal) {
                     this.modal.fromTemplateUrl('modal_login.html', {
                         animation: 'slide-in-up',
-                        focusFirstInput: true,
+                        focusFirstInput: false,
                         backdropClickToClose: false,
                         hardwareBackButtonClose: false
                     }).then(function (modal) {
@@ -962,7 +1042,7 @@ var app;
                 if (!this.dialogModal) {
                     this.modal.fromTemplateUrl('modal_patient.html', {
                         animation: 'slide-in-up',
-                        focusFirstInput: true,
+                        focusFirstInput: false,
                         backdropClickToClose: false,
                         hardwareBackButtonClose: false
                     }).then(function (modal) {
@@ -1028,7 +1108,7 @@ var app;
 
                 this.modal.fromTemplateUrl('modal_pdf.html', {
                     animation: 'slide-in-up',
-                    focusFirstInput: true,
+                    focusFirstInput: false,
                     backdropClickToClose: false,
                     hardwareBackButtonClose: false
                 }).then(function (modal) {
@@ -1102,7 +1182,7 @@ var app;
                 if (!this.dialogModal) {
                     this.modal.fromTemplateUrl('modal_pincode.html', {
                         animation: 'slide-in-up',
-                        focusFirstInput: true,
+                        focusFirstInput: false,
                         backdropClickToClose: false,
                         hardwareBackButtonClose: false
                     }).then(function (modal) {
@@ -1161,7 +1241,7 @@ var app;
 
                 this.modal.fromTemplateUrl('modal_rows.html', {
                     animation: 'slide-in-up',
-                    focusFirstInput: true,
+                    focusFirstInput: false,
                     backdropClickToClose: false,
                     hardwareBackButtonClose: false
                 }).then(function (modal) {
@@ -1235,7 +1315,7 @@ var app;
                 }
                 this.modal.fromTemplateUrl('modal_sign.html', {
                     animation: 'slide-in-up',
-                    focusFirstInput: true,
+                    focusFirstInput: false,
                     backdropClickToClose: false,
                     hardwareBackButtonClose: false
                 }).then(function (modal) {

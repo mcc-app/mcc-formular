@@ -1,4 +1,4 @@
-var app;
+﻿var app;
 (function (app) {
     (function (datas) {
         datas.countries = [
@@ -22,21 +22,21 @@ var app;
                     "list": [
                         {
                             "name": "angeforderte Formulare",
-                            "icon": "ion-ios7-arrow-right",
+                            "icon": "ion-ios-arrow-right",
                             "hasBadge": true,
                             "countBadge": 0,
                             "state": "formular"
                         },
                         {
                             "name": "standard Formulare",
-                            "icon": "ion-ios7-arrow-right",
+                            "icon": "ion-ios-arrow-right",
                             "hasBadge": false,
                             "countBadge": 0,
                             "state": "standard"
                         },
                         {
                             "name": "blanko Formulare",
-                            "icon": "ion-ios7-arrow-right",
+                            "icon": "ion-ios-arrow-right",
                             "hasBadge": false,
                             "countBadge": 0,
                             "state": "blanko"
@@ -53,14 +53,14 @@ var app;
                     "list": [
                         {
                             "name": "Einstellungen",
-                            "icon": "ion-ios7-arrow-right",
+                            "icon": "ion-ios-arrow-right",
                             "hasBadge": false,
                             "countBadge": 0,
                             "state": "setting"
                         },
                         {
                             "name": "Abmelden",
-                            "icon": "ion-ios7-arrow-right",
+                            "icon": "ion-ios-arrow-right",
                             "hasBadge": false,
                             "countBadge": 0,
                             "state": "logout"
@@ -77,21 +77,21 @@ var app;
                     "list": [
                         {
                             "name": "Kontakt",
-                            "icon": "ion-ios7-arrow-right",
+                            "icon": "ion-ios-arrow-right",
                             "hasBadge": false,
                             "countBadge": 0,
                             "state": "contact"
                         },
                         {
                             "name": "Hilfe",
-                            "icon": "ion-ios7-arrow-right",
+                            "icon": "ion-ios-arrow-right",
                             "hasBadge": false,
                             "countBadge": 0,
                             "state": "help"
                         },
                         {
                             "name": "Impressum",
-                            "icon": "ion-ios7-arrow-right",
+                            "icon": "ion-ios-arrow-right",
                             "hasBadge": false,
                             "countBadge": 0,
                             "state": "imprint"

@@ -22,6 +22,19 @@ angular.module('app').config([
     }]);
 
 angular.module('app').config([
+    '$ionicConfigProvider', function ($ionicConfigProvider) {
+        $ionicConfigProvider.views.transition('platform');
+
+        $ionicConfigProvider.views.maxCache(30);
+
+        $ionicConfigProvider.views.forwardCache(true);
+
+        $ionicConfigProvider.templates.maxPrefetch(30);
+
+        $ionicConfigProvider.navBar.alignTitle('ios');
+    }]);
+
+angular.module('app').config([
     '$stateProvider', '$urlRouterProvider', function routes($stateProvider, $urlRouterProvider) {
         $stateProvider.state('main', {
             url: '/main',
@@ -30,7 +43,7 @@ angular.module('app').config([
             authenticate: false
         }).state('formular', {
             url: '/formular',
-            templateUrl: 'formularlist.html',
+            templateUrl: 'formularlist2.html',
             controller: 'formularCtrl',
             authenticate: true
         }).state('standard', {
@@ -64,8 +77,8 @@ angular.module('app').config([
             controller: 'settingCtrl',
             authenticate: true
         }).state('logout', {
-            url: '/main',
-            abstract: true,
+            url: '/',
+            abstract: false,
             authenticate: false
         });
 
@@ -77,6 +90,12 @@ angular.module('app').run([
     '$ionicPlatform', '$rootScope', '$state', '$window', 'dataService', 'modalLoginService',
     function routes($ionicPlatform, $rootScope, $state, $window, data, login) {
         $ionicPlatform.ready(function () {
+            if (!ionic.Platform.isWebView()) {
+                if (ionic.Platform.isIOS()) {
+                    ionic.keyboard.disable();
+                }
+            }
+
             $ionicPlatform.isFullScreen = true;
 
             if ($window.cordova && $window.cordova.plugins.Keyboard) {
@@ -103,6 +122,11 @@ angular.module('app').run([
         }, false);
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            if (toState.name === 'logout') {
+                event.preventDefault();
+                return;
+            }
+
             if (toState.authenticate && !data.user.isLogin) {
                 login.redirectTo = toState.name;
 

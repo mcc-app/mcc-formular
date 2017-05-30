@@ -1,5 +1,4 @@
-/*! controllers : mccClient - 1.0.0 (02.03.2015 11:03) */
-var app;
+var app;
 (function (app) {
     (function (controller) {
         'use strict';
@@ -130,11 +129,13 @@ var app;
         
 
         var Formular = (function () {
-            function Formular($scope, loadingMsg, popup, data, rowsModal, patientModal) {
+            function Formular($scope, loadingMsg, popup, popover, scroll, data, rowsModal, patientModal) {
                 var _this = this;
                 this.$scope = $scope;
                 this.loadingMsg = loadingMsg;
                 this.popup = popup;
+                this.popover = popover;
+                this.scroll = scroll;
                 this.data = data;
                 this.rowsModal = rowsModal;
                 this.patientModal = patientModal;
@@ -142,7 +143,16 @@ var app;
                 this.isDeleteEnabled = true;
                 $scope.vm = this;
 
-                $scope.$on('modalPatientService::close', function (ev, parm) {
+                $scope.$on('$ionicView.loaded', function (evt, args) {
+                });
+
+                $scope.$on('$ionicView.afterEnter', function (evt, args) {
+                });
+
+                $scope.$on('$destroy', function () {
+                });
+
+                $scope.$on('modalPatientService::close', function (ev, args) {
                     _this.rowsModal.show();
                 });
             }
@@ -193,6 +203,8 @@ var app;
 
                 this.popup.confirmNoYes('Möchten Sie dieses Formular löschen ?', function (res) {
                     if (res) {
+                        _this.shownFormular = null;
+
                         _this.loadingMsg.show('Lösche Formular ...');
 
                         _this.data.apiFormular_delete(guid, function (err) {
@@ -206,6 +218,14 @@ var app;
 
             Formular.prototype.selectFormular = function (guid, id) {
                 var _this = this;
+                if (id) {
+                    this.popover.hide('formularlist_popover');
+                    this.shownGroup = null;
+                }
+
+                this.shownFormular = null;
+                this.searchField = '';
+
                 if (this.isDeleteMode) {
                     return;
                 }
@@ -226,7 +246,30 @@ var app;
                     }
                 });
             };
-            Formular.$inject = ['$scope', 'ionLoading', 'ionPopupService', 'dataService', 'modalRowsService', 'modalPatientService'];
+
+            Formular.prototype.selectPopover = function (item, event) {
+                var _this = this;
+                Object.getOwnPropertyNames(this.data.groups).forEach(function (el) {
+                    Object.getOwnPropertyNames(_this.data.groups[el]).forEach(function (formular) {
+                        if (typeof _this.data.groups[el][formular] === 'object') {
+                            _this.data.groups[el][formular].forEach(function (form) {
+                                if (form.name === item.desc) {
+                                    _this.shownGroup = _this.data.groups[el];
+                                }
+                            });
+                        }
+                    });
+                });
+
+                if (!this.shownGroup) {
+                    this.shownGroup = this.data.groups['de'];
+                }
+
+                this.shownFormular = item;
+                this.scroll.scrollTop('formularlist_popover');
+                this.popover.show('formularlist_popover', event);
+            };
+            Formular.$inject = ['$scope', 'ionLoading', 'ionPopupService', 'serviceIonicPopover', 'ionScroll', 'dataService', 'modalRowsService', 'modalPatientService'];
             return Formular;
         })();
         controller.Formular = Formular;
