@@ -5,15 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+
     <link rel="stylesheet" href="css/ionic.css">
     <link rel="stylesheet" href="css/app.css" />
 </head>
 
 <body data-ng-app="app">
 
-    <!-- live reload 
-    <script src="http://192.168.178.32:35729/livereload.js"></script>
-    -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/codepush.js"></script>
+    <script type="text/javascript">
+        app2.initialize();
+    </script>
 
     <!-- main-menue -->
     <ng-include src="'mainMenu.html'"></ng-include>
