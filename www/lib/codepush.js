@@ -87,10 +87,10 @@ var cp = {
 
             // Ask the user if they want to download and install the update
             navigator.notification.confirm(
-                'An update is available. Would you like to download and install it?',
+                'Ein Update ist verfügbar. möchten Sie es jetzt installieren?',
                 onConfirm,
                 'Update'
-                ['Install', 'Cancel']);
+                ['Installieren', 'Abbruch']);
         }
     },
     // Called after an update package was downloaded sucessfully.
