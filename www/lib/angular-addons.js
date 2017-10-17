@@ -46,6 +46,7 @@ directive('pdfviewer', ['$parse', '$timeout', function ($parse, $timeout) {
 
             $scope.loadPDF = function (dataOrpath) {
                 $scope.pdfDoc = null
+				$scope.pageNum = 1;
 
                 //
                 //PDFJS.getDocument(dataOrpath, null, null, $scope.documentProgress).then(function (_pdfDoc) {
@@ -117,9 +118,14 @@ directive('pdfviewer', ['$parse', '$timeout', function ($parse, $timeout) {
                     } catch (e) {
                         console.log('error', e)
                     }
+					
+					if ($scope.onPageLoad) {
+							$scope.onPageLoad({ page: $scope.pageNum, total: $scope.pdfDoc.numPages });
+						};
 
                     $timeout(function () {
-
+						
+						
 
                         if ($scope.loadProgress) {
                             $scope.loadProgress({ state: "finished", loaded: 0, total: 0 });
@@ -177,6 +183,7 @@ directive('pdfviewer', ['$parse', '$timeout', function ($parse, $timeout) {
             });
 
             $scope.$on('pdfviewer.nextPage', function (evt, id) {
+				
                 if (id !== instance_id) {
                     return;
                 }
@@ -215,8 +222,7 @@ directive('pdfviewer', ['$parse', '$timeout', function ($parse, $timeout) {
             ctx = canvas.getContext('2d');
 
             instance_id = iAttr.id;
-            //scope.scale = parseInt(iAttr.scale);
-
+			
 
             iAttr.$observe('scale', function (v) {
                 //console.log('scale attribute changed, new value is ' + v );
@@ -231,7 +237,7 @@ directive('pdfviewer', ['$parse', '$timeout', function ($parse, $timeout) {
 
             iAttr.$observe('src', function (v) {
 
-                console.log('src attribute changed, new value is ' + v);
+                //console.log('src attribute changed, new value is ' + v);
                 if (v !== undefined && v !== null && v !== '') {
                     scope.pageNum = 1;
                     scope.loadPDF(scope.src);
@@ -240,7 +246,7 @@ directive('pdfviewer', ['$parse', '$timeout', function ($parse, $timeout) {
 
             // unbind
             scope.$on('$destroy', function () {
-                //console.log('pdf destroyed')
+                console.log('pdf destroyed')
             });
         }
     };

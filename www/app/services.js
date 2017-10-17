@@ -382,11 +382,31 @@ var app;
                                                 case 'tk':
                                                     language = 'türkischer';
                                                     break;
+													
+												case 'ru':
+                                                    language = 'russischer';
+                                                    break;
+													
+												case 'es':
+                                                    language = 'spanischer';
+                                                    break;
+													
+												case 'fr':
+                                                    language = 'französischer';
+                                                    break;
+													
+												case 'it':
+                                                    language = 'italienischer';
+                                                    break;
+													
+												case 'ar':
+                                                    language = 'arabischer';
+                                                    break;
                                             }
 
                                             if (!_this.groups[blanko.desc]) {
                                                 _this.groups[blanko.desc] = {
-                                                    name: 'Formulare in ' + language + ' Sprache',
+                                                    name: 'Formulare in ' + (language || blanko.desc) + ' Sprache',
                                                     forms: []
                                                 };
                                             }

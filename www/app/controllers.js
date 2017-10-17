@@ -604,10 +604,16 @@ var app;
             Pdf.prototype.cancel = function () {
                 this.data.clientformular.isfinished = false;
                 this.scale = 0;
-
-                this.pdfModal.close();
-
-                this.pdfURL = '';
+				this.pdfInstance = null;
+				this.pdfURL = '';
+				this.isReady = false;
+				this.currentPage = 0;
+				this.totalPages = 0;
+				this.isLoading = false;
+				
+				//console.log('canceld ...')
+				
+				this.pdfModal.close();
             };
 
             Pdf.prototype.finish = function () {
@@ -622,11 +628,16 @@ var app;
                     _this.loadingMsg.hide();
 
                     if (!err) {
-                        _this.scale = 0;
-
-                        _this.pdfModal.close();
-
-                        _this.pdfURL = '';
+                        _this.data.clientformular.isfinished = false;
+						_this.scale = 0;
+						_this.pdfInstance = null;
+						_this.pdfURL = '';
+						_this.isReady = false;
+						_this.currentPage = 0;
+						_this.totalPages = 0;
+						_this.isLoading = false;
+				
+						_this.pdfModal.close();
 
                         _this.pdfModal.sendMsgDelay(500, 'finish');
                     } else {
@@ -752,7 +763,7 @@ var app;
 
                 $scope.$on('modalPdfService::finish', function (ev, parm) {
                     _this.rowsModal.close();
-
+					
                     _this.data.clientformular = null;
 
                     _this.pinModal.show();
